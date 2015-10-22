@@ -8,7 +8,8 @@
         "*.gitignore",
         "*.ruby-version",
         "Gemfile.lock",
-        "*.sublime-project"
+        "*.sublime-project",
+        "*.keep"
       ],
       "folder_exclude_patterns":[
         "log",
