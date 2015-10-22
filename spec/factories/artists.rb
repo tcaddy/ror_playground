@@ -1,4 +1,4 @@
-require File.expand_path('../../factory_helper', __FILE__)
+require File.expand_path('../../rails_helper', __FILE__)
 
 FactoryGirl.define do
   factory :artist do
