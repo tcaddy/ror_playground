@@ -19,6 +19,7 @@
 ## Ignore workspace stuff
 *.sublime-workspace
 .ruby-version
+Gemfile.lock
 
 ## from https://github.com/github/gitignore/blob/master/Rails.gitignore
 *.rbc
