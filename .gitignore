@@ -16,7 +16,11 @@
 !/log/.keep
 /tmp
 
-# from https://github.com/github/gitignore/blob/master/Rails.gitignore
+## Ignore workspace stuff
+*.sublime-workspace
+.ruby-version
+
+## from https://github.com/github/gitignore/blob/master/Rails.gitignore
 *.rbc
 capybara-*.html
 .rspec

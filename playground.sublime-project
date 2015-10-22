@@ -1,0 +1,19 @@
+{
+	"folders":
+	[
+		{
+			"path": ".",
+      "file_exclude_patterns":
+      [
+        "*.gitignore",
+        "*.ruby-version",
+        "Gemfile.lock",
+        "*.sublime-project"
+      ],
+      "folder_exclude_patterns":[
+        "log",
+        "tmp"
+      ]
+		}
+	]
+}
