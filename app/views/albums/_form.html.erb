@@ -13,7 +13,8 @@
 
   <div class="field">
     <%= f.label :artist_id %><br>
-    <%= f.number_field :artist_id %>
+    <%# f.number_field :artist_id %>
+    <%= select_tag "album[artist_id]", options_from_collection_for_select(Artist.all.order(:name), "id", "name", @album.artist_id) %>
   </div>
   <div class="field">
     <%= f.label :name %><br>

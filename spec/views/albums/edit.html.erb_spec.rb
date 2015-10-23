@@ -10,7 +10,7 @@ RSpec.describe "albums/edit", type: :view do
 
     assert_select "form[action=?][method=?]", album_path(@album), "post" do
 
-      assert_select "input#album_artist_id[name=?]", "album[artist_id]"
+      assert_select "select#album_artist_id[name=?]", "album[artist_id]"
 
       assert_select "input#album_name[name=?]", "album[name]"
 
