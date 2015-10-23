@@ -3,7 +3,7 @@ require 'uri'
 class URLValidator < ActiveModel::Validator
   def validate(record)
     options[:fields].each do |field|
-      if url = record.send(field)
+      if url = record.send(field) and url != ''
         err = false
         begin
           uri = URI.parse(url)
@@ -26,7 +26,7 @@ end
 class AlbumYearValidator < ActiveModel::Validator
   def validate(record)
     options[:fields].each do |field|
-      if year = record.send(field)
+      if year = record.send(field) and year != ''
         unless year.kind_of?(Fixnum) or year<1900 or year>Date.today.year+1
           record.errors.add(attr, 'is not a valid year')
         end
