@@ -2,13 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "songs/edit", type: :view do
   before(:each) do
-    @song = assign(:song, Song.create!(
-      :album_id => 1,
-      :name => "MyString",
-      :track => 1,
-      :disk => 1,
-      :duration => 1
-    ))
+    @song = assign(:song, create(:song))
   end
 
   it "renders the edit song form" do
@@ -16,7 +10,7 @@ RSpec.describe "songs/edit", type: :view do
 
     assert_select "form[action=?][method=?]", song_path(@song), "post" do
 
-      assert_select "input#song_album_id[name=?]", "song[album_id]"
+      assert_select "select#song_album_id[name=?]", "song[album_id]"
 
       assert_select "input#song_name[name=?]", "song[name]"
 

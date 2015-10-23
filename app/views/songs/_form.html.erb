@@ -13,7 +13,7 @@
 
   <div class="field">
     <%= f.label :album_id %><br>
-    <%= f.number_field :album_id %>
+    <%= select_tag "song[album_id]", options_from_collection_for_select(Album.for_select, "id", "artist_album_name", @song.album_id) %>
   </div>
   <div class="field">
     <%= f.label :name %><br>
@@ -28,7 +28,7 @@
     <%= f.number_field :disk %>
   </div>
   <div class="field">
-    <%= f.label :duration %><br>
+    <%= f.label :duration %> (in seconds)<br>
     <%= f.number_field :duration %>
   </div>
   <div class="actions">
