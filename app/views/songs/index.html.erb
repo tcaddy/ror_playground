@@ -16,12 +16,12 @@
 
   <tbody>
     <% @songs.each do |song| %>
-      <tr>
-        <td><%= song.album_id %></td>
+      <tr data-row-id="<%= song.id -%>">
+        <td><%= song.album ? link_to(song.album.name,song.album) : nil %></td>
         <td><%= song.name %></td>
-        <td><%= song.track %></td>
-        <td><%= song.disk %></td>
-        <td><%= song.duration %></td>
+        <td data-attr="track"><%= song.track %></td>
+        <td data-attr="disk"><%= song.disk %></td>
+        <td><%= song_duration song.duration %></td>
         <td><%= link_to 'Show', song %></td>
         <td><%= link_to 'Edit', edit_song_path(song) %></td>
         <td><%= link_to 'Destroy', song, method: :delete, data: { confirm: 'Are you sure?' } %></td>
