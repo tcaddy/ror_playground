@@ -2,7 +2,7 @@
 
 <h1>Listing Albums</h1>
 
-<table>
+<table class="albums">
   <thead>
     <tr>
       <th>Artist</th>
@@ -16,10 +16,10 @@
   <tbody>
     <% @albums.each do |album| %>
       <tr data-row-id="<%= album.id -%>">
-        <td><%= album.artist ? album.artist.name : nil %></td>
+        <td><%= album.artist ? link_to(album.artist.name,album.artist) : nil %></td>
         <td><%= album.name %></td>
         <td><%= album.year %></td>
-        <td><%= album.photo_url ? image_tag(album.photo_url,{height:50}) : nil %></td>
+        <td><%= album.photo_url && album.photo_url!='' ? image_tag(album.photo_url,{height:50}) : nil %></td>
         <td><%= link_to 'Show', album %></td>
         <td><%= link_to 'Edit', edit_album_path(album) %></td>
         <td><%= link_to 'Destroy', album, method: :delete, data: { confirm: 'Are you sure?' } %></td>

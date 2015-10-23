@@ -1,24 +1,26 @@
-<p id="notice"><%= notice %></p>
+<div class='show-album'>
+  <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Artist:</strong>
-  <%= @album.artist ? @album.artist.name : nil %>
-</p>
+  <p>
+    <strong>Artist:</strong>
+    <%= @album.artist ? link_to(@album.artist.name,@album.artist) : nil %>
+  </p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @album.name %>
-</p>
+  <p>
+    <strong>Name:</strong>
+    <%= @album.name %>
+  </p>
 
-<p>
-  <strong>Year:</strong>
-  <%= @album.year %>
-</p>
+  <p>
+    <strong>Year:</strong>
+    <%= @album.year %>
+  </p>
 
-<p>
-  <strong>Photo:</strong>
-  <%= @album.photo_url ? image_tag(@album.photo_url) : nil %>
-</p>
+  <p>
+    <strong>Photo:</strong>
+    <%= @album.photo_url && @album.photo_url!='' ? image_tag(@album.photo_url) : nil %>
+  </p>
 
-<%= link_to 'Edit', edit_album_path(@album) %> |
-<%= link_to 'Back', albums_path %>
+  <%= link_to 'Edit', edit_album_path(@album) %> |
+  <%= link_to 'Back', albums_path %>
+</div>

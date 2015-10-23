@@ -4,6 +4,19 @@
   <strong>Name:</strong>
   <%= @artist.name %>
 </p>
+<div>
+  <strong>Albums:</strong>
+  <ul class="artist-albums">
+    <% @artist.albums.order(:year,:name).each do |album| %>
+      <li>
+        <%= link_to album.name, album %>
+        <% if album.year %>
+          <%= " (#{album.year})" %>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+</div>
 
 <%= link_to 'Edit', edit_artist_path(@artist) %> |
 <%= link_to 'Back', artists_path %>
