@@ -2,21 +2,15 @@ require 'rails_helper'
 
 RSpec.describe "songs/show", type: :view do
   before(:each) do
-    @song = assign(:song, Song.create!(
-      :album_id => 1,
-      :name => "Name",
-      :track => 2,
-      :disk => 3,
-      :duration => 4
-    ))
+    @song = assign(:song, create(:song))
   end
 
   it "renders attributes in <p>" do
     render
-    expect(rendered).to match(/1/)
-    expect(rendered).to match(/Name/)
-    expect(rendered).to match(/2/)
-    expect(rendered).to match(/3/)
-    expect(rendered).to match(/4/)
+    expect(rendered).to match(/#{@song.name}/)
+    assert_select "a[href='#{url_for(@song.album)}']", text: @song.album.name
+    expect(rendered).to match(/#{@song.track}/)
+    expect(rendered).to match(/#{@song.disk}/)
+    expect(rendered).to match(/#{song_duration @song.duration}/)
   end
 end

@@ -2,7 +2,7 @@
 
 <p>
   <strong>Album:</strong>
-  <%= @song.album_id %>
+  <%= @song.album ? link_to(@song.album.name,@song.album) : nil %>
 </p>
 
 <p>
@@ -22,7 +22,7 @@
 
 <p>
   <strong>Duration:</strong>
-  <%= @song.duration %>
+  <%= song_duration @song.duration %>
 </p>
 
 <%= link_to 'Edit', edit_song_path(@song) %> |
