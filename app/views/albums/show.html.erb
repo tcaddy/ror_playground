@@ -16,8 +16,8 @@
 </p>
 
 <p>
-  <strong>Photo url:</strong>
-  <%= @album.photo_url %>
+  <strong>Photo:</strong>
+  <%= @album.photo_url ? image_tag(@album.photo_url) : nil %>
 </p>
 
 <%= link_to 'Edit', edit_album_path(@album) %> |

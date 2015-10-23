@@ -13,17 +13,29 @@ RSpec.describe "albums/index", type: :view do
   it "renders a list of albums" do
     render
     attrs.map{|c| c.to_s.titleize}.each do |col|
-      assert_select "thead>tr>th",text:col,count:1
+      expected_value = if col=="Photo Url"
+        "Photo"
+      else
+        col
+      end
+      assert_select "thead>tr>th",text:expected_value,count:1
     end
 
     @albums.each do |album|
       attrs.each do |key|
         expected_value = (if key==:artist
           album.artist.name
+        elsif key==:photo_url
+          nil
         else
           album[key]
         end).to_s
-        assert_select "tr[data-row-id='#{album.id}']>td",text: expected_value, count:1
+        sel_string = if key==:photo_url
+          "tr[data-row-id='#{album.id}']>td>img[src='#{album.photo_url}']"
+        else
+          "tr[data-row-id='#{album.id}']>td"
+        end
+        assert_select sel_string,text: expected_value, count:1
       end
     end
   end
