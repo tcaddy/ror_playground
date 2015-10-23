@@ -21,14 +21,28 @@ class URLValidator < ActiveModel::Validator
   end
 end
 
-# validates a suitable year for an album, allowing nil values
+# validates a suitable year for an album, allowing nil/blank values
 # (:validates_numericality_of doesn't like nil values)
 class AlbumYearValidator < ActiveModel::Validator
   def validate(record)
     options[:fields].each do |field|
       if year = record.send(field) and year != ''
-        unless year.kind_of?(Fixnum) or year<1900 or year>Date.today.year+1
-          record.errors.add(attr, 'is not a valid year')
+        unless year.kind_of?(Fixnum) and year>=1900 and year<=Date.today.year+1
+          record.errors.add(field, 'is not a valid year')
+        end
+      end
+    end
+  end
+end
+
+# validates a suitable track number for a song, allowing nil/blank values
+# (:validates_numericality_of doesn't like nil values)
+class TrackNumberValidator < ActiveModel::Validator
+  def validate(record)
+    options[:fields].each do |field|
+      if track = record.send(field) and track != ''
+        unless track.kind_of?(Fixnum) and track<100 or track>0
+          record.errors.add(field, "is not a valid #{field} number")
         end
       end
     end
