@@ -10,4 +10,8 @@ RSpec.describe Artist, type: :model do
   describe "ActiveModel validations" do
     it { expect(artist).to validate_presence_of(:name) }
   end
+
+  describe "ActiveRecord associations" do
+    it { expect(artist).to have_many(:albums) }
+  end
 end
