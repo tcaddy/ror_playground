@@ -8,14 +8,14 @@
       <th>Artist</th>
       <th>Name</th>
       <th>Year</th>
-      <th>Photo url</th>
+      <th>Photo Url</th>
       <th colspan="3"></th>
     </tr>
   </thead>
 
   <tbody>
     <% @albums.each do |album| %>
-      <tr>
+      <tr data-row-id="<%= album.id -%>">
         <td><%= album.artist_id %></td>
         <td><%= album.name %></td>
         <td><%= album.year %></td>

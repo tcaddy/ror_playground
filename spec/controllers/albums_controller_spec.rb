@@ -24,11 +24,11 @@ RSpec.describe AlbumsController, type: :controller do
   # Album. As you add validations to Album, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    attributes_for(:album)
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    attributes_for(:album,name: nil)
   }
 
   # This should return the minimal set of values that should be in the session
@@ -103,14 +103,17 @@ RSpec.describe AlbumsController, type: :controller do
   describe "PUT #update" do
     context "with valid params" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        attributes_for(:album)
       }
 
       it "updates the requested album" do
-        album = Album.create! valid_attributes
+        old_attributes = valid_attributes
+        album = Album.create! old_attributes
         put :update, {:id => album.to_param, :album => new_attributes}, valid_session
         album.reload
-        skip("Add assertions for updated state")
+        old_attributes.each do |k,v|
+          expect(v).not_to eq(album[k])
+        end
       end
 
       it "assigns the requested album as @album" do

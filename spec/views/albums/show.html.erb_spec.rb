@@ -2,19 +2,14 @@ require 'rails_helper'
 
 RSpec.describe "albums/show", type: :view do
   before(:each) do
-    @album = assign(:album, Album.create!(
-      :artist_id => 1,
-      :name => "Name",
-      :year => 2,
-      :photo_url => "Photo Url"
-    ))
+    @album = assign(:album, create(:album))
   end
 
+  let(:attrs) {[:artist_id,:name,:year,:photo_url]}
   it "renders attributes in <p>" do
     render
-    expect(rendered).to match(/1/)
-    expect(rendered).to match(/Name/)
-    expect(rendered).to match(/2/)
-    expect(rendered).to match(/Photo Url/)
+    attrs.each do |attr|
+      expect(rendered).to match(/#{@album[attr]}/)
+    end
   end
 end
