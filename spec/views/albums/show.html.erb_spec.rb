@@ -9,7 +9,12 @@ RSpec.describe "albums/show", type: :view do
   it "renders attributes in <p>" do
     render
     attrs.each do |attr|
-      expect(rendered).to match(/#{@album[attr]}/)
+      expected_value = if attr==:artist_id
+        Artist.find(@album[attr]).name
+      else
+        @album[attr]
+      end
+      expect(rendered).to match(/#{expected_value}/)
     end
   end
 end

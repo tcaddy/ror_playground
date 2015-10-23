@@ -2,7 +2,7 @@
 
 <p>
   <strong>Artist:</strong>
-  <%= @album.artist_id %>
+  <%= @album.artist ? @album.artist.name : nil %>
 </p>
 
 <p>
