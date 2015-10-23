@@ -16,7 +16,7 @@
   <tbody>
     <% @albums.each do |album| %>
       <tr data-row-id="<%= album.id -%>">
-        <td><%= album.artist_id %></td>
+        <td><%= album.artist ? album.artist.name : nil %></td>
         <td><%= album.name %></td>
         <td><%= album.year %></td>
         <td><%= album.photo_url %></td>

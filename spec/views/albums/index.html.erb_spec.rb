@@ -18,8 +18,12 @@ RSpec.describe "albums/index", type: :view do
 
     @albums.each do |album|
       attrs.each do |key|
-        key=:artist_id if key==:artist
-        assert_select "tr[data-row-id='#{album.id}']>td",text: album[key].to_s, count:1
+        expected_value = (if key==:artist
+          album.artist.name
+        else
+          album[key]
+        end).to_s
+        assert_select "tr[data-row-id='#{album.id}']>td",text: expected_value, count:1
       end
     end
   end
