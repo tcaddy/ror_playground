@@ -26,6 +26,25 @@ RSpec.describe Album, type: :model do
     it { expect(album).to have_many(:songs) }
   end
 
+  describe "scopes" do
+    it ".for_select returns options for select, with artist name, sorted by artist/album name" do
+      4.times do
+        artist = create(:artist)
+        4.times do
+          create(:album,artist_id:artist.id)
+        end
+      end
+      result = Album.for_select
+      i=-1
+      Artist.all.order(:name).each do |artist|
+        artist.albums.all.order(:name).each do |album|
+          i+=1
+          expect(result[i]).to eq(album)
+        end
+      end
+    end
+  end
+
   describe "public instance methods" do
     context "responds to its methods" do
       it { expect(album).to respond_to(:artist_album_name) }
