@@ -25,4 +25,18 @@ RSpec.describe Album, type: :model do
     it { expect(album).to belong_to(:artist) }
     it { expect(album).to have_many(:songs) }
   end
+
+  describe "public instance methods" do
+    context "responds to its methods" do
+      it { expect(album).to respond_to(:artist_album_name) }
+    end
+
+    context "executes methods correctly" do
+      context "#artist_album_name" do
+        it "does what it's supposed to..." do
+          expect(album.artist_album_name).to eq("#{album.artist.name} - #{album.name}")
+        end
+      end
+    end
+  end
 end
