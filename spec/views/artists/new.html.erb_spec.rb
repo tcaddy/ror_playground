@@ -2,9 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "artists/new", type: :view do
   before(:each) do
-    assign(:artist, Artist.new(
-      :name => "MyString"
-    ))
+    assign(:artist, build(:artist))
   end
 
   it "renders new artist form" do
