@@ -20,6 +20,18 @@
     <strong>Photo:</strong>
     <%= @album.photo_url && @album.photo_url!='' ? image_tag(@album.photo_url) : nil %>
   </p>
+  <div>
+    <strong>Songs:</strong>
+    <ul class="album-songs">
+      <% @album.songs.order(:disk,:track,:name).each do |song| %>
+        <li data-song-id="<%= song.id -%>">
+          <%= "#{song.disk} - " unless song.disk.blank? %>
+          <%= "%02d" % song.track %> - 
+          <%= link_to song.name, song %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
 
   <%= link_to 'Edit', edit_album_path(@album) %> |
   <%= link_to 'Back', albums_path %>

@@ -16,5 +16,16 @@ RSpec.describe "albums/show", type: :view do
       end
       expect(rendered).to match(/#{expected_value}/)
     end
+
+    assert_select "ul.album-songs" do
+      @album.songs.each do |song|
+        expected_text = song.disk.blank? ? "" : "#{song.disk} - "
+        expected_text += "#{"%02d" % song.track} - #{song.name}"
+        assert_select "li[data-song-id='#{song.id}']", text: expected_text do
+          assert_select "a[href='#{url_for(song)}']", text: song.name
+        end
+      end
+    end
+
   end
 end
