@@ -19,18 +19,18 @@ RSpec.describe Song, type: :model do
   describe "public class methods" do
     context "responds to its methods" do
       it { expect(Song).to respond_to(:parse_duration) }
+      it { expect(Song).to respond_to(:song_duration) }
     end
 
     context "executes methods correctly" do
-      context "Song.parse_duration" do
-        it "does what it's supposed to..." do
+      let(:items) do
           [
             {
-              string: "0:01",
+              string: "00:01",
               integer: 1
             },
             {
-              string: "1:05",
+              string: "01:05",
               integer: 65
             },
             {
@@ -38,15 +38,28 @@ RSpec.describe Song, type: :model do
               integer: 605
             },
             {
-              string: "1:01:01",
+              string: "01:01:01",
               integer: 3661
-            },
-            {
-              string: 123,
-              integer: 123
             }
-          ].each do |h|
+          ]
+        end
+      context "Song.parse_duration" do
+        let(:parse_duration_items) {[{string:123,integer:123}]}
+        it "parses a string duration to seconds" do
+          (items+parse_duration_items).each do |h|
             expect(Song.parse_duration(h[:string])).to eq(h[:integer])
+          end
+        end
+      end
+      context "Song.song_duration" do
+        it "returns a formatted time duration" do
+          expect(Song.song_duration).to be_nil
+          expect(Song.song_duration(1)).to eq('00:01')
+          expect(Song.song_duration(61)).to eq('01:01')
+          expect(Song.song_duration(3599)).to eq('59:59')
+          expect(Song.song_duration(3601)).to eq('01:00:01')
+          items.each do |h|
+            expect(Song.song_duration(h[:integer])).to eq(h[:string])
           end
         end
       end
