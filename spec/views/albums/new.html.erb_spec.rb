@@ -17,6 +17,8 @@ RSpec.describe "albums/new", type: :view do
       assert_select "input#album_year[name=?]", "album[year]"
 
       assert_select "input#album_photo_url[name=?]", "album[photo_url]"
+
+      assert_select "input[type='submit'][data-disable-with='Saving...']"
     end
   end
 end
