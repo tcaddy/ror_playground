@@ -31,6 +31,10 @@ RSpec.describe SongsController, type: :controller do
     attributes_for(:song,name:nil)
   }
 
+  let(:attributes_with_string_duration) {
+    attributes_for(:song,duration:'1:23')
+  }
+
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
   # SongsController. Be sure to keep this updated too.
@@ -98,6 +102,13 @@ RSpec.describe SongsController, type: :controller do
         expect(response).to render_template("new")
       end
     end
+
+    context "with string :duration" do
+      it "parses the string and assigns an integer" do
+        post :create, {:song => attributes_with_string_duration}, valid_session
+        expect(Song.last.duration).to eq(83)
+      end
+    end
   end
 
   describe "PUT #update" do
@@ -140,6 +151,15 @@ RSpec.describe SongsController, type: :controller do
         song = Song.create! valid_attributes
         put :update, {:id => song.to_param, :song => invalid_attributes}, valid_session
         expect(response).to render_template("edit")
+      end
+    end
+
+    context "with string :duration" do
+      it "parses the string and assigns an integer" do
+        song = Song.create! valid_attributes
+        put :update, {:id => song.to_param, :song => attributes_with_string_duration}, valid_session
+        song.reload
+        expect(song.duration).to eq(83)
       end
     end
   end
