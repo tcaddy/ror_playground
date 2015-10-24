@@ -8,6 +8,7 @@ class Song < ActiveRecord::Base
 
   def self.parse_duration(value=nil)
     return nil if value.nil?
+    return value if value.kind_of?(Fixnum)
     sum = 0
     if value.kind_of?(String) and value.match(/\d\d?:\d\d/)
       value.split(":").reverse.each_with_index do |item,i|

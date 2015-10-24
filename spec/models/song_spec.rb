@@ -40,6 +40,10 @@ RSpec.describe Song, type: :model do
             {
               string: "1:01:01",
               integer: 3661
+            },
+            {
+              string: 123,
+              integer: 123
             }
           ].each do |h|
             expect(Song.parse_duration(h[:string])).to eq(h[:integer])
