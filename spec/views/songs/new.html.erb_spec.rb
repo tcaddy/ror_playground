@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "songs/new", type: :view do
   before(:each) do
-    assign(:song, build(:song))
+    @song = assign(:song, build(:song_full))
   end
 
   it "renders new song form" do
@@ -18,7 +18,9 @@ RSpec.describe "songs/new", type: :view do
 
       assert_select "input#song_disk[name=?]", "song[disk]"
 
-      assert_select "input#song_duration[name=?]", "song[duration]"
+      assert_select "input#song_duration[name=?][value=?]", "song[duration]",Song.song_duration(@song.duration)
+
+      assert_select "input[type='submit'][data-disable-with='Saving...']"
     end
   end
 end

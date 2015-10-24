@@ -28,10 +28,10 @@
     <%= f.number_field :disk %>
   </div>
   <div class="field">
-    <%= f.label :duration %> (in seconds)<br>
-    <%= f.number_field :duration %>
+    <%= f.label :duration %><br>
+    <%= text_field_tag "song[duration]", song_duration(@song.duration), {id: :song_duration} %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "data-disable-with":"Saving..." %>
   </div>
 <% end %>

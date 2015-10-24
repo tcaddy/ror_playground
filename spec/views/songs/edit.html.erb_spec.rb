@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "songs/edit", type: :view do
   before(:each) do
-    @song = assign(:song, create(:song))
+    @song = assign(:song, create(:song_full))
   end
 
   it "renders the edit song form" do
@@ -18,7 +18,9 @@ RSpec.describe "songs/edit", type: :view do
 
       assert_select "input#song_disk[name=?]", "song[disk]"
 
-      assert_select "input#song_duration[name=?]", "song[duration]"
+      assert_select "input#song_duration[name=?][value=?]", "song[duration]", Song.song_duration(@song.duration)
+
+      assert_select "input[type='submit'][data-disable-with='Saving...']"
     end
   end
 end
