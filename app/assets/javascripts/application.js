@@ -18,13 +18,13 @@
 var App = window.App || {};
 (function($, undefined) {
   App.init = function() {
-    console.log('running App.init()');
     Turbolinks.enableProgressBar();
     $("button.close").on('click',function(e){
       $(e.currentTarget).parent().remove();
     });
-    console.log('App.init() complete');
   };
+
+  // this is the Turbolinks event to bind to for page refreshes + DOM ready
   $(document).on('page:change', function(e) {
     App.init();
   });
