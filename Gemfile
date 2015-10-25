@@ -28,6 +28,7 @@ gem 'kaminari'
 
 # Use Bootstrap framework for UI
 gem 'bootstrap-sass'
+gem 'bootstrap-kaminari-views'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
