@@ -1,37 +1,39 @@
 <div class='show-album'>
-  <p id="notice"><%= notice %></p>
+  <%= render 'shared/notice' %>
 
-  <p>
-    <strong>Artist:</strong>
-    <%= @album.artist ? link_to(@album.artist.name,@album.artist) : nil %>
-  </p>
+  <dl class="dl-horizontal" data-attr="artist">
+    <dt>Artist:</dt>
+    <dd><%= @album.artist ? link_to(@album.artist.name,@album.artist) : nil %></dd>
+  </dl>
 
-  <p>
-    <strong>Name:</strong>
-    <%= @album.name %>
-  </p>
+  <dl class="dl-horizontal" data-attr="name">
+    <dt>Name:</dt>
+    <dd><%= @album.name %></dd>
+  </dl>
 
-  <p>
-    <strong>Year:</strong>
-    <%= @album.year %>
-  </p>
+  <dl class="dl-horizontal" data-attr="year">
+    <dt>Year:</dt>
+    <dd><%= @album.year %></dd>
+  </dl>
 
-  <p>
-    <strong>Photo:</strong>
-    <%= @album.photo_url && @album.photo_url!='' ? image_tag(@album.photo_url) : nil %>
-  </p>
-  <div>
-    <strong>Songs:</strong>
-    <ul class="album-songs">
-      <% @album.songs.order(:disk,:track,:name).each do |song| %>
-        <li data-song-id="<%= song.id -%>">
-          <%= "#{song.disk} - " unless song.disk.blank? %>
-          <%= "%02d" % song.track %> - 
-          <%= link_to song.name, song %>
-        </li>
-      <% end %>
-    </ul>
-  </div>
+  <dl class="dl-horizontal" data-attr="photo_url">
+    <dt>Photo:</dt>
+    <dd><%= @album.photo_url && @album.photo_url!='' ? image_tag(@album.photo_url,class: 'img') : nil %></dd>
+  </dl>
+  <dl class="dl-horizontal" data-attr="songs">
+    <dt>Songs:</dt>
+    <dd>
+      <ul class="album-songs">
+        <% @album.songs.order(:disk,:track,:name).each do |song| %>
+          <li data-song-id="<%= song.id -%>">
+            <%= "#{song.disk} - " unless song.disk.blank? %>
+            <%= "%02d" % song.track %> - 
+            <%= link_to song.name, song %>
+          </li>
+        <% end %>
+      </ul>
+    </dd>
+  </dl>
 
   <%= link_to 'Edit', edit_album_path(@album) %> |
   <%= link_to 'Back', albums_path %>

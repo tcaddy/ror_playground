@@ -10,9 +10,12 @@ RSpec.describe "artists/show", type: :view do
 
   it "renders attributes in <p>" do
     render
+    expect(response).to render_template("shared/_notice")
     expect(rendered).to match(/#{ERB::Util.html_escape @artist.name}/)
 
-    assert_select "ul.artist-albums" do
+    assert_select "dl[data-attr='name']>dd", text: @artist.name
+
+    assert_select "dl[data-attr='albums']>dd ul.artist-albums" do
       @artist.albums.each do |album|
         assert_select "a[href='#{url_for(album)}']", text: album.name
       end

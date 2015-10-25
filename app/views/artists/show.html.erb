@@ -1,22 +1,23 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Name:</strong>
-  <%= @artist.name %>
-</p>
-<div>
-  <strong>Albums:</strong>
-  <ul class="artist-albums">
-    <% @artist.albums.order(:year,:name).each do |album| %>
-      <li>
-        <%= link_to album.name, album %>
-        <% if album.year %>
-          <%= " (#{album.year})" %>
-        <% end %>
-      </li>
-    <% end %>
-  </ul>
-</div>
+<%= render 'shared/notice' %>
+<dl class="dl-horizontal" data-attr="name">
+  <dt>Name:</dt>
+  <dd><%= @artist.name %></dd>
+</dl>
+<dl class="dl-horizontal" data-attr="albums">
+  <dt>Albums:</dt>
+  <dd>
+    <ul class="artist-albums">
+      <% @artist.albums.order(:year,:name).each do |album| %>
+        <li>
+          <%= link_to album.name, album %>
+          <% if album.year %>
+            <%= " (#{album.year})" %>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  </dd>
+</dl>
 
 <%= link_to 'Edit', edit_artist_path(@artist) %> |
 <%= link_to 'Back', artists_path %>

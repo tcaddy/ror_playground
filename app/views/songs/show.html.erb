@@ -1,29 +1,29 @@
-<p id="notice"><%= notice %></p>
+<%= render 'shared/notice' %>
 
-<p>
-  <strong>Album:</strong>
-  <%= @song.album ? link_to(@song.album.name,@song.album) : nil %>
-</p>
+<dl class="dl-horizontal" data-attr="album">
+  <dt>Album:</dt>
+  <dd><%= @song.album ? link_to(@song.album.name,@song.album) : nil %></dd>
+</dl>
 
-<p>
-  <strong>Name:</strong>
-  <%= @song.name %>
-</p>
+<dl class="dl-horizontal" data-attr="name">
+  <dt>Name:</dt>
+  <dd><%= @song.name %></dd>
+</dl>
 
-<p>
-  <strong>Track:</strong>
-  <%= @song.track %>
-</p>
+<dl class="dl-horizontal" data-attr="track">
+  <dt>Track:</dt>
+  <dd><%= @song.track %></dd>
+</dl>
 
-<p>
-  <strong>Disk:</strong>
-  <%= @song.disk %>
-</p>
+<dl class="dl-horizontal" data-attr="disk">
+  <dt>Disk:</dt>
+  <dd><%= @song.disk %></dd>
+</dl>
 
-<p>
-  <strong>Duration:</strong>
-  <%= song_duration @song.duration %>
-</p>
+<dl class="dl-horizontal" data-attr="duration">
+  <dt>Duration:</dt>
+  <dd><%= song_duration @song.duration %></dd>
+</dl>
 
 <%= link_to 'Edit', edit_song_path(@song) %> |
 <%= link_to 'Back', songs_path %>
