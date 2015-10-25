@@ -10,9 +10,9 @@ RSpec.describe "artists/edit", type: :view do
 
     assert_select "form[action=?][method=?]", artist_path(@artist), "post" do
 
-      assert_select "input#artist_name[name=?]", "artist[name]"
+      assert_select "input#artist_name[name=?].form-control", "artist[name]"
 
-      assert_select "input[type='submit'][data-disable-with='Saving...']"
+      assert_select "input[type='submit'][data-disable-with='Saving...'].btn-primary"
     end
   end
 end

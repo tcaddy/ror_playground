@@ -11,27 +11,27 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="field form-group">
     <%= f.label :album_id %><br>
-    <%= select_tag "song[album_id]", options_from_collection_for_select(Album.for_select, "id", "artist_album_name", @song.album_id) %>
+    <%= select_tag "song[album_id]", options_from_collection_for_select(Album.for_select, "id", "artist_album_name", @song.album_id), class: 'form-control' %>
   </div>
-  <div class="field">
+  <div class="field form-group">
     <%= f.label :name %><br>
-    <%= f.text_field :name %>
+    <%= f.text_field :name, class: 'form-control' %>
   </div>
-  <div class="field">
+  <div class="field form-group">
     <%= f.label :track %><br>
-    <%= f.number_field :track %>
+    <%= f.number_field :track, class: 'form-control' %>
   </div>
-  <div class="field">
+  <div class="field form-group">
     <%= f.label :disk %><br>
-    <%= f.number_field :disk %>
+    <%= f.number_field :disk, class: 'form-control' %>
   </div>
-  <div class="field">
+  <div class="field form-group">
     <%= f.label :duration %><br>
-    <%= text_field_tag "song[duration]", song_duration(@song.duration), {id: :song_duration} %>
+    <%= text_field_tag "song[duration]", song_duration(@song.duration), {id: :song_duration, class: 'form-control'} %>
   </div>
   <div class="actions">
-    <%= f.submit "data-disable-with":"Saving..." %>
+    <%= f.submit "data-disable-with":"Saving...", class: 'btn btn-primary' %>
   </div>
 <% end %>
