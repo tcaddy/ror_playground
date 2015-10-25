@@ -1,32 +1,37 @@
-<p id="notice"><%= notice %></p>
+<%= render 'shared/notice' %>
 
 <h1>Listing Albums</h1>
 
-<table class="albums">
-  <thead>
-    <tr>
-      <th>Artist</th>
-      <th>Name</th>
-      <th>Year</th>
-      <th>Photo</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @albums.each do |album| %>
-      <tr data-row-id="<%= album.id -%>">
-        <td><%= album.artist ? link_to(album.artist.name,album.artist) : nil %></td>
-        <td><%= album.name %></td>
-        <td><%= album.year %></td>
-        <td><%= album.photo_url && album.photo_url!='' ? image_tag(album.photo_url,{height:50}) : nil %></td>
-        <td><%= link_to 'Show', album %></td>
-        <td><%= link_to 'Edit', edit_album_path(album) %></td>
-        <td><%= link_to 'Destroy', album, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+<div class="table-responsive">
+  <table class="table table-striped albums">
+    <thead>
+      <tr>
+        <th>Artist</th>
+        <th>Name</th>
+        <th>Year</th>
+        <th>Photo</th>
+        <th colspan="3"></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+
+    <tbody>
+      <% @albums.each do |album| %>
+        <tr data-row-id="<%= album.id -%>">
+          <td data-attr="artist"><%= album.artist ? link_to(album.artist.name,album.artist) : nil %></td>
+          <td data-attr="name"><%= link_to album.name, album %></td>
+          <td data-attr="year"><%= album.year %></td>
+          <td data-attr="photo_url"><%= album.photo_url && album.photo_url!='' ? image_tag(album.photo_url,{class:'img-responsive img-rounded',style:'height:50px;'}) : nil %></td>
+          <td><%= link_to 'Edit', edit_album_path(album) %></td>
+          <td>
+            <a href="<%= url_for(album) -%>" data-confirm="Are you sure?" class="btn btn-primary" rel="nofollow" data-method="delete" title="Destroy">
+              <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+            </a>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
 <%= paginate @albums %>
 <br>
 

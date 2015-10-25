@@ -12,30 +12,40 @@ RSpec.describe "albums/index", type: :view do
 
   it "renders a list of albums" do
     render
-    attrs.map{|c| c.to_s.titleize}.each do |col|
-      expected_value = if col=="Photo Url"
-        "Photo"
-      else
-        col
-      end
-      assert_select "thead>tr>th",text:expected_value,count:1
-    end
-
-    @albums.each do |album|
-      attrs.each do |key|
-        expected_value = (if key==:artist
-          album.artist.name
-        elsif key==:photo_url
-          nil
+    expect(response).to render_template("shared/_notice")
+    assert_select "div.table-responsive table.table-striped" do
+      attrs.map{|c| c.to_s.titleize}.each do |col|
+        expected_value = if col=="Photo Url"
+          "Photo"
         else
-          album[key]
-        end).to_s
-        sel_string = if key==:photo_url
-          "tr[data-row-id='#{album.id}']>td>img[src='#{album.photo_url}']"
-        else
-          "tr[data-row-id='#{album.id}']>td"
+          col
         end
-        assert_select sel_string,text: expected_value, count:1
+        assert_select "thead>tr>th",text:expected_value,count:1
+      end
+
+      @albums.each do |album|
+        assert_select "tr[data-row-id='#{album.id}']" do
+          attrs.each do |key|
+            expected_value = (if key==:artist
+              album.artist.name
+            elsif key==:photo_url
+              nil
+            else
+              album[key]
+            end).to_s
+            sel_string = ["td[data-attr='#{key}']", (case key
+              when :photo_url
+                "img[src='#{album.photo_url}']"
+              when :name
+                "a[href='#{url_for(album)}']"
+              when :artist
+                "a[href='#{url_for(album.artist)}']"
+              else nil
+            end)].compact.join(' ')
+            assert_select sel_string,text: expected_value, count:1
+          end
+          assert_select "td a[href='#{url_for(album)}'][data-method='delete'] span.glyphicon-remove"
+        end
       end
     end
   end
