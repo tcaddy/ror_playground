@@ -145,6 +145,7 @@ arr.each do |hash|
   album = Album.create! hash[:album]
   hash[:songs].each_with_index do |song,i|
     opts = {
+      album_id: album.id,
       name: song[:name],
       duration: Song.parse_duration(song[:duration]),
       track: i+1
