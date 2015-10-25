@@ -14,7 +14,7 @@ RSpec.describe "albums/show", type: :view do
       else
         @album[attr]
       end
-      expect(rendered).to match(/#{expected_value}/)
+      expect(rendered).to match(/#{ERB::Util.html_escape(expected_value)}/)
     end
 
     assert_select "ul.album-songs" do

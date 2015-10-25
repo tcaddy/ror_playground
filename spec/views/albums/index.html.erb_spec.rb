@@ -2,10 +2,10 @@ require 'rails_helper'
 
 RSpec.describe "albums/index", type: :view do
   before(:each) do
-    @albums = [
+    @albums = Kaminari.paginate_array([
       create(:album_full),
       create(:album_full)
-    ]
+    ]).page(1)
   end
 
   let(:attrs) {[:artist,:name,:year,:photo_url]}

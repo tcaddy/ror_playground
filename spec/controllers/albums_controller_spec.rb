@@ -24,7 +24,7 @@ RSpec.describe AlbumsController, type: :controller do
   # Album. As you add validations to Album, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    attributes_for(:album)
+    attributes_for(:album_full,artist_id: create(:artist).id)
   }
 
   let(:invalid_attributes) {
@@ -40,7 +40,7 @@ RSpec.describe AlbumsController, type: :controller do
     it "assigns all albums as @albums" do
       album = Album.create! valid_attributes
       get :index, {}, valid_session
-      expect(assigns(:albums)).to eq([album])
+      expect(assigns(:albums).first).to eq(album)
     end
   end
 
@@ -103,16 +103,17 @@ RSpec.describe AlbumsController, type: :controller do
   describe "PUT #update" do
     context "with valid params" do
       let(:new_attributes) {
-        attributes_for(:album)
+        attributes_for(:album_full,artist: create(:artist))
       }
 
       it "updates the requested album" do
         old_attributes = valid_attributes
         album = Album.create! old_attributes
-        put :update, {:id => album.to_param, :album => new_attributes}, valid_session
+        cached_new_attributes = new_attributes
+        put :update, {:id => album.to_param, :album => cached_new_attributes}, valid_session
         album.reload
-        old_attributes.each do |k,v|
-          expect(v).not_to eq(album[k])
+        cached_new_attributes.each do |k,v|
+          expect(album[k]).to eq(v)
         end
       end
 

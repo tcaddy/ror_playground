@@ -10,7 +10,7 @@ RSpec.describe "artists/show", type: :view do
 
   it "renders attributes in <p>" do
     render
-    expect(rendered).to match(/#{@artist.name}/)
+    expect(rendered).to match(/#{ERB::Util.html_escape @artist.name}/)
 
     assert_select "ul.artist-albums" do
       @artist.albums.each do |album|
