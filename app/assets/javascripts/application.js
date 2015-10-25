@@ -15,4 +15,17 @@
 //= require turbolinks
 //= require bootstrap-sprockets
 //= require_tree .
-Turbolinks.enableProgressBar();
+var App = window.App || {};
+(function($, undefined) {
+  App.init = function() {
+    console.log('running App.init()');
+    Turbolinks.enableProgressBar();
+    $("button.close").on('click',function(e){
+      $(e.currentTarget).parent().remove();
+    });
+    console.log('App.init() complete');
+  };
+  $(document).on('page:change', function(e) {
+    App.init();
+  });
+})(jQuery);
