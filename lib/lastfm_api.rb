@@ -21,8 +21,6 @@ class LastfmApi
   #   3. Visit the auth URL and authorize the app
   #   4. Generate a session_key
   def settings
-    fn = File.join(File.expand_path(File.dirname(__FILE__)), '../config/last_fm.yml')
-    puts fn
-    YAML.load(File.open(fn).read)
+    YAML.load(File.open(File.join(File.expand_path(File.dirname(__FILE__)), '../config/last_fm.yml')).read)
   end
 end
