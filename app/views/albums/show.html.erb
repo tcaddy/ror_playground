@@ -18,14 +18,14 @@
 
   <dl class="dl-horizontal" data-attr="photo_url">
     <dt>Photo:</dt>
-    <dd><%= @album.photo_url && @album.photo_url!='' ? image_tag(@album.photo_url,class: 'img') : nil %></dd>
+    <dd style="max-width:400px;"><%= @album.photo_url && @album.photo_url!='' ? image_tag(@album.photo_url,class: 'img img-responsive img-rounded') : nil %></dd>
   </dl>
   <dl class="dl-horizontal" data-attr="songs">
     <dt>Songs:</dt>
     <dd>
-      <ul class="album-songs">
+      <ul class="album-songs list-group">
         <% @album.songs.order(:disk,:track,:name).each do |song| %>
-          <li data-song-id="<%= song.id -%>">
+          <li data-song-id="<%= song.id -%>" class="list-group-item">
             <%= "#{song.disk} - " unless song.disk.blank? %>
             <%= "%02d" % song.track %> - 
             <%= link_to song.name, song %>

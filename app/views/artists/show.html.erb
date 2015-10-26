@@ -6,9 +6,9 @@
 <dl class="dl-horizontal" data-attr="albums">
   <dt>Albums:</dt>
   <dd>
-    <ul class="artist-albums">
+    <ul class="artist-albums list-group">
       <% @artist.albums.order(:year,:name).each do |album| %>
-        <li>
+        <li class="list-group-item">
           <%= link_to album.name, album %>
           <% if album.year %>
             <%= " (#{album.year})" %>
