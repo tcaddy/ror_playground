@@ -12,7 +12,6 @@ RSpec.describe "albums/index", type: :view do
 
   it "renders a list of albums" do
     render
-    expect(response).to render_template("shared/_notice")
     assert_select "div.table-responsive table.table-striped" do
       attrs.map{|c| c.to_s.titleize}.each do |col|
         expected_value = if col=="Photo Url"

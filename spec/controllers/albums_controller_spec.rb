@@ -53,6 +53,7 @@ RSpec.describe AlbumsController, type: :controller do
   end
 
   describe "GET #new" do
+    login_user
     it "assigns a new album as @album" do
       get :new, {}, valid_session
       expect(assigns(:album)).to be_a_new(Album)
@@ -60,6 +61,7 @@ RSpec.describe AlbumsController, type: :controller do
   end
 
   describe "GET #edit" do
+    login_user
     it "assigns the requested album as @album" do
       album = Album.create! valid_attributes
       get :edit, {:id => album.to_param}, valid_session
@@ -68,6 +70,7 @@ RSpec.describe AlbumsController, type: :controller do
   end
 
   describe "POST #create" do
+    login_user
     context "with valid params" do
       it "creates a new Album" do
         expect {
@@ -101,6 +104,7 @@ RSpec.describe AlbumsController, type: :controller do
   end
 
   describe "PUT #update" do
+    login_user
     context "with valid params" do
       let(:new_attributes) {
         attributes_for(:album_full,artist: create(:artist))
@@ -146,6 +150,7 @@ RSpec.describe AlbumsController, type: :controller do
   end
 
   describe "DELETE #destroy" do
+    login_user
     it "destroys the requested album" do
       album = Album.create! valid_attributes
       expect {

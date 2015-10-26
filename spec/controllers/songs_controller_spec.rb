@@ -57,6 +57,7 @@ RSpec.describe SongsController, type: :controller do
   end
 
   describe "GET #new" do
+    login_user
     it "assigns a new song as @song" do
       get :new, {}, valid_session
       expect(assigns(:song)).to be_a_new(Song)
@@ -64,6 +65,7 @@ RSpec.describe SongsController, type: :controller do
   end
 
   describe "GET #edit" do
+    login_user
     it "assigns the requested song as @song" do
       song = Song.create! valid_attributes
       get :edit, {:id => song.to_param}, valid_session
@@ -72,6 +74,7 @@ RSpec.describe SongsController, type: :controller do
   end
 
   describe "POST #create" do
+    login_user
     context "with valid params" do
       it "creates a new Song" do
         expect {
@@ -112,6 +115,7 @@ RSpec.describe SongsController, type: :controller do
   end
 
   describe "PUT #update" do
+    login_user
     context "with valid params" do
       let(:new_attributes) {
         attributes_for(:song)
@@ -120,10 +124,11 @@ RSpec.describe SongsController, type: :controller do
       it "updates the requested song" do
         old_attributes = valid_attributes
         song = Song.create! old_attributes
-        put :update, {:id => song.to_param, :song => new_attributes}, valid_session
+        cached_new_attributes = new_attributes
+        put :update, {:id => song.to_param, :song => cached_new_attributes}, valid_session
         song.reload
-        old_attributes.each do |k,v|
-          expect(v).not_to eq(song[k])
+        cached_new_attributes.each do |k,v|
+          expect(song[k]).to eq(v)
         end
       end
 
@@ -165,6 +170,7 @@ RSpec.describe SongsController, type: :controller do
   end
 
   describe "DELETE #destroy" do
+    login_user
     it "destroys the requested song" do
       song = Song.create! valid_attributes
       expect {

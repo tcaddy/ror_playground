@@ -8,14 +8,13 @@ RSpec.describe "albums/show", type: :view do
   let(:attrs) {[:artist_id,:name,:year,:photo_url]}
   it "renders attributes in <p>" do
     render
-    expect(response).to render_template("shared/_notice")
     attrs.each do |attr|
       expected_value = if attr==:artist_id
         Artist.find(@album[attr]).name
       else
         @album[attr]
       end
-      assert_select "dl[data-attr='#{attr.to_s.chomp('_id')}']>dd", text: ERB::Util.html_escape(expected_value)
+      assert_select "dl[data-attr='#{attr.to_s.chomp('_id')}']>dd", text: expected_value
     end
 
     assert_select "dl[data-attr='songs']>dd>ul.album-songs" do

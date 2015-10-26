@@ -53,6 +53,7 @@ RSpec.describe ArtistsController, type: :controller do
   end
 
   describe "GET #new" do
+    login_user
     it "assigns a new artist as @artist" do
       get :new, {}, valid_session
       expect(assigns(:artist)).to be_a_new(Artist)
@@ -60,6 +61,7 @@ RSpec.describe ArtistsController, type: :controller do
   end
 
   describe "GET #edit" do
+    login_user
     it "assigns the requested artist as @artist" do
       artist = Artist.create! valid_attributes
       get :edit, {:id => artist.to_param}, valid_session
@@ -68,6 +70,7 @@ RSpec.describe ArtistsController, type: :controller do
   end
 
   describe "POST #create" do
+    login_user
     context "with valid params" do
       it "creates a new Artist" do
         expect {
@@ -101,6 +104,7 @@ RSpec.describe ArtistsController, type: :controller do
   end
 
   describe "PUT #update" do
+    login_user
     context "with valid params" do
       let(:new_attributes) {
         attributes_for(:artist)
@@ -109,10 +113,11 @@ RSpec.describe ArtistsController, type: :controller do
       it "updates the requested artist" do
         old_attributes = valid_attributes
         artist = Artist.create! old_attributes
-        put :update, {:id => artist.to_param, :artist => new_attributes}, valid_session
+        cached_new_attributes = new_attributes
+        put :update, {:id => artist.to_param, :artist => cached_new_attributes}, valid_session
         artist.reload
-        old_attributes.each do |k,v|
-          expect(v).not_to eq(artist[k])
+        cached_new_attributes.each do |k,v|
+          expect(artist[k]).to eq(v)
         end
       end
 
@@ -145,6 +150,7 @@ RSpec.describe ArtistsController, type: :controller do
   end
 
   describe "DELETE #destroy" do
+    login_user
     it "destroys the requested artist" do
       artist = Artist.create! valid_attributes
       expect {

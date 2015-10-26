@@ -1,6 +1,4 @@
 <div class='show-album'>
-  <%= render 'shared/notice' %>
-
   <dl class="dl-horizontal" data-attr="artist">
     <dt>Artist:</dt>
     <dd><%= @album.artist ? link_to(@album.artist.name,@album.artist) : nil %></dd>

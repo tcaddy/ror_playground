@@ -1,6 +1,14 @@
 <% unless notice.blank? %>
-  <div id="notice" class="alert alert-warning" role="alert" style="margin-top:15px;">
+  <div id="notice" class="alert alert-warning" role="alert">
     <%= notice %>
+    <button type="button" class="close" aria-label="Close" data-dismiss="alert">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+<% end %>
+<% unless alert.blank? %>
+  <div id="alert" class="alert alert-danger" role="alert">
+    <%= alert %>
     <button type="button" class="close" aria-label="Close" data-dismiss="alert">
       <span aria-hidden="true">&times;</span>
     </button>

@@ -10,7 +10,6 @@ RSpec.describe "artists/index", type: :view do
 
   it "renders a list of artists" do
     render
-    expect(response).to render_template("shared/_notice")
     assert_select "div.table-responsive table.table-striped" do
       @artists.each do |artist|
         assert_select "tr[data-row-id='#{artist.id}']", count:1 do
