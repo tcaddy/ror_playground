@@ -8,6 +8,7 @@ RSpec.describe Artist, type: :model do
   let(:artist) { build(:artist) }
   describe "ActiveModel validations" do
     it { expect(artist).to validate_presence_of(:name) }
+    it { expect(artist).to validate_uniqueness_of(:name) }
   end
 
   describe "ActiveRecord associations" do
