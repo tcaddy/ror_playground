@@ -19,7 +19,6 @@
 ## Ignore workspace stuff
 *.sublime-workspace
 .ruby-version
-Gemfile.lock
 config/last_fm.yml
 
 ## from https://github.com/github/gitignore/blob/master/Rails.gitignore
