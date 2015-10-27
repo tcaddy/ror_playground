@@ -23,6 +23,7 @@ RSpec.describe "albums/show", type: :view do
         expected_text += "#{"%02d" % song.track} - #{song.name}"
         assert_select "li[data-song-id='#{song.id}']", text: expected_text do
           assert_select "a[href='#{url_for(song)}']", text: song.name
+          assert_select "span[data-spotify-id='#{song.spotify_id}'].badge.glyphicon-play.pointer", text: ' ', count: song.spotify_id.blank? ? 0 : 1
         end
       end
     end

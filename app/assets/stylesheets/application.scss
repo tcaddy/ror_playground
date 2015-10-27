@@ -27,6 +27,10 @@ html.turbolinks-progress-bar::before {
   height: 2px !important;
 }
 
+.pointer {
+  cursor: pointer;
+}
+
 form > div.actions {
   margin-bottom: 10px;
 }

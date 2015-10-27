@@ -19,6 +19,13 @@ var App = window.App || {};
 (function($, undefined) {
   App.init = function() {
     Turbolinks.enableProgressBar();
+    $("[data-spotify-id]").on("click", function(e) {
+      var sel = $(e.currentTarget);
+      if (sel.length>0) {
+        $("iframe[src*='spotify']").remove();
+        sel.parent().append('<iframe src="https://embed.spotify.com/?uri=spotify:track:'+sel.data().spotifyId+'" width="300" height="80" frameborder="0" allowtransparency="true" style="height:80px;width:300px;"></iframe>');
+      }
+    });
   };
 
   // this is the Turbolinks event to bind to for page refreshes + DOM ready

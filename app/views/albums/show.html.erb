@@ -27,6 +27,9 @@
             <%= "#{song.disk} - " unless song.disk.blank? %>
             <%= "%02d" % song.track %> - 
             <%= link_to song.name, song %>
+            <% unless song.spotify_id.nil? or song.spotify_id.blank? %>
+              <span class="badge glyphicon glyphicon-play pointer" data-spotify-id="<%= song.spotify_id -%>"> </span>
+            <% end %>
           </li>
         <% end %>
       </ul>
