@@ -20,6 +20,7 @@
 *.sublime-workspace
 .ruby-version
 config/last_fm.yml
+lib/tasks/rspec.rake
 
 ## from https://github.com/github/gitignore/blob/master/Rails.gitignore
 *.rbc
