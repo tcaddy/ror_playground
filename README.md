@@ -1,4 +1,4 @@
-== Ruby on Rails Playground
+# Ruby on Rails Playground
 
 This is a sample Ruby on Rails application.  It has been a while since I wrote a Rails application and I wanted to get some experience using the latest versions of Ruby and Rails.
 
