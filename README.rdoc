@@ -8,7 +8,7 @@ This sample application has three basic models:
  * Albums
  * Songs
 
- It uses the Spotify API to seed these basic models.
+It uses the Spotify API to seed these basic models.
 
- This site is [hosted on Heroku](https://stark-citadel-5574.herokuapp.com/) (the free version with limited resources).  You can try it out to add a new artist or play a song (requires Spotify to be installed) through the Rails website.
+This site is [hosted on Heroku](https://stark-citadel-5574.herokuapp.com/) (the free version with limited resources).  You can try it out to add a new artist or play a song (requires Spotify to be installed) through the Rails website.
 
