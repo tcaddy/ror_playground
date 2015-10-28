@@ -50,16 +50,18 @@ class Artist < ActiveRecord::Base
           y['width'] <=> x['width']
         end).first['url']
       end
-      album = Album.create! opts
-      sp_album.tracks.each do |track|
-        Song.create!(
-          album_id: album.id,
-          name: track.name,
-          duration: (track.duration_ms / 1000.0).round,
-          disk: track.disc_number,
-          track: track.track_number,
-          spotify_id: track.id
-        )
+      album = Album.new opts
+      if album.save
+        sp_album.tracks.each do |track|
+          Song.create!(
+            album_id: album.id,
+            name: track.name,
+            duration: (track.duration_ms / 1000.0).round,
+            disk: track.disc_number,
+            track: track.track_number,
+            spotify_id: track.id
+          )
+        end
       end
     end
     true

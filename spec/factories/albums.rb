@@ -1,7 +1,11 @@
 FactoryGirl.define do
-  factory :album do
-    artist
-    name      { Faker::App.name }
+  factory :album do |f|
+    f.artist
+    f.name      do
+      (
+        10.times.to_a.map{|n| Faker::App.name } - Album.where(artist_id: f.artist_id).map(&:name)
+      ).sample
+    end
   end
 
   factory :album_full, parent: :album do
