@@ -70,35 +70,46 @@ RSpec.describe ArtistsController, type: :controller do
   end
 
   describe "POST #create" do
-    login_user
-    context "with valid params" do
-      it "creates a new Artist" do
-        expect {
-          post :create, {:artist => valid_attributes}, valid_session
-        }.to change(Artist, :count).by(1)
-      end
-
-      it "assigns a newly created artist as @artist" do
+    context "as a not logged in user" do
+      it "creates one Artist per minute" do
         post :create, {:artist => valid_attributes}, valid_session
         expect(assigns(:artist)).to be_a(Artist)
-        expect(assigns(:artist)).to be_persisted
-      end
 
-      it "redirects to the created artist" do
         post :create, {:artist => valid_attributes}, valid_session
-        expect(response).to redirect_to(Artist.last)
+        expect(response).to redirect_to(artists_url)
       end
     end
+    context "as a logged in user" do
+      login_user
+      context "with valid params" do
+        it "creates a new Artist" do
+          expect {
+            post :create, {:artist => valid_attributes}, valid_session
+          }.to change(Artist, :count).by(1)
+        end
 
-    context "with invalid params" do
-      it "assigns a newly created but unsaved artist as @artist" do
-        post :create, {:artist => invalid_attributes}, valid_session
-        expect(assigns(:artist)).to be_a_new(Artist)
+        it "assigns a newly created artist as @artist" do
+          post :create, {:artist => valid_attributes}, valid_session
+          expect(assigns(:artist)).to be_a(Artist)
+          expect(assigns(:artist)).to be_persisted
+        end
+
+        it "redirects to the created artist" do
+          post :create, {:artist => valid_attributes}, valid_session
+          expect(response).to redirect_to(Artist.last)
+        end
       end
 
-      it "re-renders the 'new' template" do
-        post :create, {:artist => invalid_attributes}, valid_session
-        expect(response).to render_template("new")
+      context "with invalid params" do
+        it "assigns a newly created but unsaved artist as @artist" do
+          post :create, {:artist => invalid_attributes}, valid_session
+          expect(assigns(:artist)).to be_a_new(Artist)
+        end
+
+        it "re-renders the 'new' template" do
+          post :create, {:artist => invalid_attributes}, valid_session
+          expect(response).to render_template("new")
+        end
       end
     end
   end
