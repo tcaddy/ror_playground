@@ -2,6 +2,8 @@ class Artist < ActiveRecord::Base
   has_many :albums, dependent: :destroy
   validates :name, presence: true, uniqueness: true
 
+  scope :created_in_last_minute, -> {where("created_at >=?",Time.at(Time.now.to_i-60))}
+
   def self.seed_artists_from_spotify(artist_names=[])
     artist_names.each do |artist_name|
       if artist = Artist.create(name: artist_name)
