@@ -1,5 +1,0 @@
-# edit this file and save it as config/last_fm.yml
---- 
-api_secret: your-api-secret
-session_key: your-session-key
-api_key: your-api-key

@@ -33,8 +33,7 @@ gem 'kaminari'
 gem 'bootstrap-sass'
 gem 'bootstrap-kaminari-views'
 
-# Use Last.FM or Spotify API to seed database
-gem 'lastfm'
+# Use Spotify API to seed database
 gem 'rspotify'
 
 # Use Devise for authentication
