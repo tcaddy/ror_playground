@@ -4,3 +4,12 @@
 table.albums td, div.show-album p strong {
   vertical-align: top;
 }
+
+ul.album-songs > li > a {
+  margin-right: 20px;
+}
+
+.spotify-iframe-wrapper > iframe {
+  height: 82px;
+  width: 300px;
+}

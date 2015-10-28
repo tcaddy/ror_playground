@@ -22,8 +22,8 @@ var App = window.App || {};
     $("[data-spotify-id]").on("click", function(e) {
       var sel = $(e.currentTarget);
       if (sel.length>0) {
-        $("iframe[src*='spotify']").remove();
-        sel.parent().append('<iframe src="https://embed.spotify.com/?uri=spotify:track:'+sel.data().spotifyId+'" width="300" height="80" frameborder="0" allowtransparency="true" style="height:80px;width:300px;"></iframe>');
+        $("iframe[src*='spotify'],span.spotify-iframe-wrapper").remove();
+        sel.parent().append('<span class="spotify-iframe-wrapper"><iframe src="https://embed.spotify.com/?uri=spotify:track:'+sel.data().spotifyId+'" width="300" height="80" frameborder="0" allowtransparency="true"></iframe></span>');
       }
     });
   };
