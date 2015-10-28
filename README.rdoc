@@ -1,28 +1,14 @@
-== README
+== Ruby on Rails Playground
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is a sample Ruby on Rails application.  It has been a while since I wrote a Rails application and I wanted to get some experience using the latest versions of Ruby and Rails.
 
-Things you may want to cover:
+This sample application has three basic models:
 
-* Ruby version
+ * Artists
+ * Albums
+ * Songs
 
-* System dependencies
+ It uses the Spotify API to seed these basic models.
 
-* Configuration
+ This site is [hosted on Heroku](https://stark-citadel-5574.herokuapp.com/) (the free version with limited resources).  You can try it out to add a new artist or play a song (requires Spotify to be installed) through the Rails website.
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
