@@ -12,7 +12,7 @@ RSpec.describe Album, type: :model do
   let(:album_good_year) { build(:album, year: Time.zone.today.year) }
   describe 'ActiveModel validations' do
     it { expect(album).to validate_presence_of(:name) }
-    it { expect(album).to validate_uniqueness_of(:name).scoped_to(:artist_id) }
+    it { expect(album).to validate_uniqueness_of(:name).scoped_to(:artist_id).case_insensitive }
     it { expect(album_bad_photo_url).not_to be_valid }
 
     # Note: We cannot create a test case with an invalid :year

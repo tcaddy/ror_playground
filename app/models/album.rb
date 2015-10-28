@@ -4,7 +4,7 @@ class Album < ActiveRecord::Base
   belongs_to :artist
   has_many :songs, dependent: :destroy
 
-  validates :name, presence: true, uniqueness: {scope: :artist_id}
+  validates :name, presence: true, uniqueness: {scope: :artist_id, case_sensitive: false}
   validates_with URLValidator, fields: [:photo_url]
   validates_with AlbumYearValidator, fields: [:year]
 
