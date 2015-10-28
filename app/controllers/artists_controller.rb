@@ -1,7 +1,8 @@
+# Artist controller
 class ArtistsController < ApplicationController
   before_action :set_artist, only: [:show, :edit, :update, :destroy]
-  skip_before_action :authenticate_user!, :only=>[:new, :create]
-  before_action :throttle_new_before_action, :only=>[:new, :create]
+  skip_before_action :authenticate_user!, only: [:new, :create]
+  before_action :throttle_new_before_action, only: [:new, :create]
 
   # GET /artists
   # GET /artists.json
@@ -66,20 +67,20 @@ class ArtistsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_artist
-      @artist = Artist.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def artist_params
-      params.require(:artist).permit(:name)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_artist
+    @artist = Artist.find(params[:id])
+  end
 
-    def throttle_new_before_action
-      # limit creation from users who are not logged in to 1 per minute
-      if !user_signed_in? and Artist.created_in_last_minute.count>0
-        redirect_to artists_url, notice: 'Artist creation limited to one new artist per minute.' and return
-      end
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def artist_params
+    params.require(:artist).permit(:name)
+  end
+
+  def throttle_new_before_action
+    # limit creation from users who are not logged in to 1 per minute
+    return if user_signed_in? || Artist.created_in_last_minute.count == 0
+    redirect_to artists_url, notice: 'Artist creation limited to one new artist per minute.' and return
+  end
 end

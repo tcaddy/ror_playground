@@ -66,6 +66,9 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   # don't use spring, per http://stackoverflow.com/a/24276104/512453
   # gem 'spring'
+
+  # Rubocop for checking Ruby code styling for best practices
+  gem 'rubocop', require: false
 end
 
 group :production do

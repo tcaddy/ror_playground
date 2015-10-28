@@ -4,5 +4,4 @@ FactoryGirl.define do
     password            'abcd1234'
     sign_in_count       0
   end
-
 end

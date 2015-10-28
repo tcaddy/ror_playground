@@ -11,9 +11,9 @@ require 'rails_helper'
 #   end
 # end
 RSpec.describe SongsHelper, type: :helper do
-  describe "#song_duration" do
-    it "returns a formatted time duration" do
-      [nil,1,61,3599,3601].each do |val|
+  describe '#song_duration' do
+    it 'returns a formatted time duration' do
+      [nil, 1, 61, 3_599, 3_601].each do |val|
         expect(helper.song_duration(val)).to eq(Song.song_duration(val))
       end
     end

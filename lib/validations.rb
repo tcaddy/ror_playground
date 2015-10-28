@@ -1,21 +1,19 @@
-# validates a URL
 require 'uri'
+# validates a URL
 class URLValidator < ActiveModel::Validator
   def validate(record)
     options[:fields].each do |field|
-      if url = record.send(field) and url != ''
+      if (url = record.send(field)) && url != ''
         err = false
         begin
           uri = URI.parse(url)
-          unless uri.kind_of?(URI::HTTP) or uri.kind_of?(URI::HTTPS)
+          unless uri.is_a?(URI::HTTP) || uri.is_a?(URI::HTTPS)
             err = true
           end
         rescue URI::InvalidURIError
           err = true
         end
-        if err
-          record.errors.add(field, 'invalid URL format')
-        end
+        record.errors.add(field, 'invalid URL format') if err
       end
     end
   end
@@ -26,8 +24,8 @@ end
 class AlbumYearValidator < ActiveModel::Validator
   def validate(record)
     options[:fields].each do |field|
-      if year = record.send(field) and year != ''
-        unless year.kind_of?(Fixnum) and year>=1900 and year<=Date.today.year+1
+      if (year = record.send(field)) && year != ''
+        unless year.is_a?(Fixnum) && year >= 1900 && year <= Time.zone.today.year + 1
           record.errors.add(field, 'is not a valid year')
         end
       end
@@ -40,8 +38,8 @@ end
 class TrackNumberValidator < ActiveModel::Validator
   def validate(record)
     options[:fields].each do |field|
-      if track = record.send(field) and track != ''
-        unless track.kind_of?(Fixnum) and track<100 or track>0
+      if (track = record.send(field)) && track != ''
+        unless track.is_a?(Fixnum) && (track < 100 || track > 0)
           record.errors.add(field, "is not a valid #{field} number")
         end
       end

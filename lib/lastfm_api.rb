@@ -1,6 +1,7 @@
 require 'lastfm'
-class LastfmApi
 
+# LastFM API class
+class LastfmApi
   attr_reader :last_fm
 
   private
@@ -10,8 +11,8 @@ class LastfmApi
   end
 
   def new_last_fm_instance
-    fm = Lastfm.new(settings["api_key"], settings["api_secret"])
-    fm.session = settings["session_key"]
+    fm = Lastfm.new(settings['api_key'], settings['api_secret'])
+    fm.session = settings['session_key']
     fm
   end
 

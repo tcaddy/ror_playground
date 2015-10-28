@@ -1,6 +1,6 @@
+# Songs helper
 module SongsHelper
-
-  def song_duration(seconds=nil)
+  def song_duration(seconds = nil)
     Song.song_duration seconds
   end
 end
