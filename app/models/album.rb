@@ -1,7 +1,7 @@
 require "#{File.expand_path(::Rails.root)}/lib/validations"
 class Album < ActiveRecord::Base
   belongs_to :artist
-  has_many :songs
+  has_many :songs, dependent: :destroy
 
   validates :name, presence: true
   validates_with URLValidator, fields: [:photo_url]
