@@ -36,6 +36,14 @@ RSpec.describe ArtistsController, type: :controller do
       get :index, {}, valid_session
       expect(assigns(:artists)).to eq([artist])
     end
+    it 'deletes old records' do
+      2.times { create(:artist) }
+      Timecop.freeze(Time.now.advance(hours: 25)) do
+        get :index, {}, valid_session
+        expect(assigns(:artists)).to eq([])
+        expect(Artist.count).to eq(0)
+      end
+    end
   end
 
   describe 'GET #show' do

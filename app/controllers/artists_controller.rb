@@ -3,6 +3,7 @@ class ArtistsController < ApplicationController
   before_action :set_artist, only: [:show, :edit, :update, :destroy]
   skip_before_action :authenticate_user!, only: [:new, :create]
   before_action :throttle_new_before_action, only: [:new, :create]
+  before_action :delete_old_records, only: [:index]
 
   # GET /artists
   # GET /artists.json
@@ -82,5 +83,13 @@ class ArtistsController < ApplicationController
     # limit creation from users who are not logged in to 1 per minute
     return if user_signed_in? || Artist.created_in_last_minute.count == 0
     redirect_to artists_url, notice: 'Artist creation limited to one new artist per minute.' and return
+  end
+
+  # Heroku doesn't have cron and makes you give them a credit card to run
+  # tasks on their scheduler.
+  # I would prefer to run something like this overnight.
+  # This is a free alternative to running it on a schedule.
+  def delete_old_records
+    Artist.over_1_day_old.destroy_all
   end
 end
