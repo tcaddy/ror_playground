@@ -18,11 +18,11 @@
           <td data-attr="artist"><%= album.artist ? link_to(album.artist.name,album.artist) : nil %></td>
           <td data-attr="name"><%= link_to album.name, album %></td>
           <td data-attr="year"><%= album.year %></td>
-          <td data-attr="photo_url"><%= album.photo_url && album.photo_url!='' ? image_tag(album.photo_url,{class:'img-responsive img-rounded',style:'height:50px;'}) : nil %></td>
+          <td data-attr="photo_url"><%= album.photo_url && album.photo_url!='' ? image_tag(album.photo_url,{class: 'img-responsive img-rounded',style:'height:50px;', alt: '[cover art]'}) : nil %></td>
           <td><%= link_to 'Edit', edit_album_path(album) %></td>
           <td>
             <a href="<%= url_for(album) -%>" data-confirm="Are you sure?" class="btn btn-primary" rel="nofollow" data-method="delete" title="Destroy">
-              <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+              <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
             </a>
           </td>
         </tr>
@@ -30,7 +30,9 @@
     </tbody>
   </table>
 </div>
-<%= paginate @albums %>
+<div class="text-center">
+  <%= paginate @albums %>
+</div>
 <br>
 
 <%= link_to 'New Album', new_album_path %>

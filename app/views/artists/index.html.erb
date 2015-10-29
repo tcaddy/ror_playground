@@ -19,7 +19,7 @@
             <td><%= link_to 'Edit', edit_artist_path(artist) %></td>
             <td>
               <a href="<%= url_for(artist) -%>" data-confirm="Are you sure?" class="btn btn-primary" rel="nofollow" data-method="delete" title="Destroy">
-                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
               </a>
             </td>
           </tr>
@@ -27,7 +27,9 @@
       </tbody>
     </table>
   </div>
-  <%= paginate @artists %>
+  <div class="text-center">
+    <%= paginate @artists %>
+  </div>
   <br>
 
   <%= link_to 'New Artist', new_artist_path %>

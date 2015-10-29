@@ -24,7 +24,7 @@
           <td><%= link_to 'Edit', edit_song_path(song) %></td>
           <td>
             <a href="<%= url_for(song) -%>" data-confirm="Are you sure?" class="btn btn-primary" rel="nofollow" data-method="delete" title="Destroy">
-              <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+              <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
             </a>
           </td>
         </tr>
@@ -32,7 +32,9 @@
     </tbody>
   </table>
 </div>
-<%= paginate @songs %>
+<div class="text-center">
+  <%= paginate @songs %>
+</div>
 <br>
 
 <%= link_to 'New Song', new_song_path %>
