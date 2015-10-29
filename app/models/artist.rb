@@ -3,7 +3,8 @@ class Artist < ActiveRecord::Base
   has_many :albums, dependent: :destroy
   validates :name, presence: true, uniqueness: true
 
-  scope :created_in_last_minute, -> { where('created_at >=?', Time.at(Time.now.to_i - 60)) }
+  scope :created_in_last_minute, -> { where('created_at >=?', Time.now.advance(minutes: -1)) }
+  scope :over_1_day_old, -> { where('created_at <= ? and updated_at <= ?', Time.now.advance(days: -1), Time.now.advance(days: -1)) }
 
   def self.seed_artists_from_spotify(artist_names = [])
     artist_names.each do |artist_name|

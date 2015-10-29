@@ -16,14 +16,22 @@ RSpec.describe Artist, type: :model do
   end
 
   describe 'scopes' do
+    before(:each) { artist.save }
     it '.created_in_last_minute returns recently created records' do
-      expect(Artist.created_in_last_minute.count).to eq(0)
-      artist = create(:artist)
       expect(Artist.created_in_last_minute.first).to eq(artist)
     end
     it '.created_in_last_minute doesn\'t return old records' do
-      create(:artist, created_at: Time.now.utc.advance(days: -1))
-      expect(Artist.created_in_last_minute.count).to eq(0)
+      Timecop.freeze(Time.now.advance(minutes: 2)) do
+        expect(Artist.created_in_last_minute.count).to eq(0)
+      end
+    end
+    it '.over_1_day_old returns older records' do
+      Timecop.freeze(Time.now.advance(hours: 25)) do
+        expect(Artist.over_1_day_old.first).to eq(artist)
+      end
+    end
+    it '.over_1_day_old doesn\'t return new records' do
+      expect(Artist.over_1_day_old.count).to eq(0)
     end
   end
 
